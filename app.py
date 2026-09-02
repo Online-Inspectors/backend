@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import requests
+from typing import Any
 
 app = Flask(__name__)
 
@@ -17,7 +18,7 @@ def inspect_domain():
   if not domain:
     return jsonify({"error": "Missing domain parameter"}), 400
 
-  results = {"domain": domain, "rdap": None, "dns": None}
+  results: dict[str, Any] = {"domain": domain, "rdap": None, "dns": None}
 
   # 1. Zero-Key RDAP Lookup (Domain Age / Registration Info)
   try:
